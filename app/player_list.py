@@ -16,13 +16,7 @@ class PlayerList:
             yield current.player
             current = current.next
 
-    # def is_empty(self):
-    #     if len(self) == 0:
-    #         return True
-    #     else:
-    #         return False
-
-    def push(self, player):
+    def push(self, player):  # add node to the end of the list
         new_node = PlayerNode(player)
         if self.tail is None:  # if empty list
             self.head = new_node
@@ -33,7 +27,7 @@ class PlayerList:
             self.tail = new_node
         self.size += 1
 
-    def pop(self):
+    def pop(self):  # remove node at the end of the list and return its value
         if self.tail is None:
             raise IndexError('Popping from empty list')
         removed_player = self.tail.player
@@ -73,7 +67,7 @@ class PlayerList:
     def delete(self, player):  # remove the first occurrence of a node of a specified value
         current = self.head
         while current:
-            if current.player == player:
+            if current.player.uid == player:
                 if current == self.head:
                     return self.shift()
                 elif current == self.tail:

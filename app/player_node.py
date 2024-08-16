@@ -9,7 +9,7 @@ class PlayerNode:
 
     @property
     def player(self):
-        return self.player
+        return self._player
 
     # @player.setter
     # def player(self, new_player):
