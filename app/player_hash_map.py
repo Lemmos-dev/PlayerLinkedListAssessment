@@ -19,13 +19,15 @@ class PlayerHashMap:
     #Insert values into hash map
     def __setitem__(self, key: str, value: Player) -> None:
         #get the index from the key using the hash function
-        hashed_key = hash(key) % self.size #self.get_index(key)
+        hashed_key = hash(key) % self.size      #self.get_index(key)
 
         #get the player with the corresponding key
         player_list = self.hash_map[hashed_key]
 
+        record_value = None
+        index = None
+
         found_key = False
-        index: int
         for index, record in enumerate(player_list):
             record_key, record_value = record
 
@@ -42,13 +44,58 @@ class PlayerHashMap:
             player_list.append((key, value))
 
     #return searched value with specific key
-    def __getitem__(self, key: str) -> Player:
-        ...
+    def __getitem__(self, key: str) -> str:
+        hashed_key = hash(key) % self.size
+        player_list = self.hash_map[hashed_key]
+        record_value = None
+        found_key = False
+        for index, record in enumerate(player_list):
+            record_key, record_value = record
+
+            if record_key == key:
+                found_key = True
+                break
+
+        if found_key:
+            return record_value
+        else:
+            return "Not Found"
 
     #
     def __len__(self) -> int:
-        return Player.size
+        return len(self.hash_map)
 
     #remove a value with a specific key
     def __delitem__(self, key: str) -> None:
-        ...
+        hashed_key = hash(key) % self.size
+        player_list = self.hash_map[hashed_key]
+
+        index = None
+        found_key = False
+        for index, record in enumerate(player_list):
+            record_key, record_value = record
+
+            if record_key == key:
+                found_key = True
+                break
+
+        if found_key:
+            player_list.pop(index)
+        return
+
+    def __str__(self) -> str:
+        return "".join(str(item) for item in self.hash_map)
+
+hash_table = PlayerHashMap(10)
+
+hash_table.__setitem__( "qwe", Player("123", "abc"))
+hash_table.__setitem__("rty", Player("456", "def"))
+print(hash_table.__getitem__("qwe"))
+print()
+print(hash_table)
+print()
+hash_table.__delitem__("rty")
+print(hash_table)
+
+
+
