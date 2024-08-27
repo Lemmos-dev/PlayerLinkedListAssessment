@@ -1,8 +1,11 @@
-from player import Player
+from glob import has_magic
+
+from app.player import Player
+
 
 # https://www.geeksforgeeks.org/hash-map-in-python/
 class PlayerHashMap:
-    #create empty player list of given size
+    # create empty player list of given size
     def __init__(self, size):
         self.size = size
         self.hash_map = self.create_player_lists()
@@ -14,15 +17,13 @@ class PlayerHashMap:
         if isinstance(key, Player):
             return hash(key) % self.size
         else:
-            return Player.hash(key) % self.size
+            return Player.hash(key, self.size)
 
-    #Insert values into hash map
-    def __setitem__(self, key: str, value: Player) -> None:
-        #get the index from the key using the hash function
-        hashed_key = hash(key) % self.size      #self.get_index(key)
-
-        #get the player with the corresponding key
-        player_list = self.hash_map[hashed_key]
+    # Insert values into hash map
+    def __setitem__(self, key: str, value: str) -> None:
+        # get the index from the key using the hash function
+        # get the player with the corresponding key
+        player_list = self.hash_map[self.get_index(key)]
 
         record_value = None
         index = None
@@ -36,17 +37,17 @@ class PlayerHashMap:
                 found_key = True
                 break
 
-        #update the key value if it's the same key
-        #otherwise add new key and value
+        # update the key value if it's the same key
+        # otherwise add new key and value
         if found_key:
             player_list[index] = (key, value)
         else:
             player_list.append((key, value))
 
-    #return searched value with specific key
+    # return searched value with specific key
     def __getitem__(self, key: str) -> str:
-        hashed_key = hash(key) % self.size
-        player_list = self.hash_map[hashed_key]
+        player_list = self.hash_map[self.get_index(key)]
+
         record_value = None
         found_key = False
         for index, record in enumerate(player_list):
@@ -65,10 +66,9 @@ class PlayerHashMap:
     def __len__(self) -> int:
         return len(self.hash_map)
 
-    #remove a value with a specific key
+    # remove a value with a specific key
     def __delitem__(self, key: str) -> None:
-        hashed_key = hash(key) % self.size
-        player_list = self.hash_map[hashed_key]
+        player_list = self.hash_map[self.get_index(key)]
 
         index = None
         found_key = False
@@ -86,16 +86,24 @@ class PlayerHashMap:
     def __str__(self) -> str:
         return "".join(str(item) for item in self.hash_map)
 
-hash_table = PlayerHashMap(10)
-
-hash_table.__setitem__( "qwe", Player("123", "abc"))
-hash_table.__setitem__("rty", Player("456", "def"))
-print(hash_table.__getitem__("qwe"))
-print()
-print(hash_table)
-print()
-hash_table.__delitem__("rty")
-print(hash_table)
+    def display(self) -> None:
+        for key, value in enumerate(self.hash_map):
+            if value:
+                print(f"Key {key}: {value}")
 
 
+# hash_table = PlayerHashMap(10)
+#
+# hash_table.__setitem__("123", "abc")
+# hash_table.__setitem__("789", "fgh")
+# hash_table.__setitem__("456", "def")
+# print(hash_table.__getitem__("123"))
+# hash_table.display()
+# print(len(hash_table))
+# print()
+# print(hash_table)
+# print()
+# hash_table.__delitem__("456")
+# print(hash_table)
+# print()
 

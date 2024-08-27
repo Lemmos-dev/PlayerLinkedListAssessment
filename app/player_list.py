@@ -1,3 +1,4 @@
+from app.player import Player
 from app.player_node import PlayerNode
 
 
@@ -16,7 +17,7 @@ class PlayerList:
             yield current.player
             current = current.next
 
-    def push(self, player):  # add node to the end of the list
+    def push(self, player: Player) -> None:  # add node to the end of the list
         new_node = PlayerNode(player)
         if self.tail is None:  # if empty list
             self.head = new_node
@@ -27,7 +28,7 @@ class PlayerList:
             self.tail = new_node
         self.size += 1
 
-    def pop(self):  # remove node at the end of the list and return its value
+    def pop(self) -> Player:  # remove node at the end of the list and return its value
         if self.tail is None:
             raise IndexError('Popping from empty list')
         removed_player = self.tail.player
@@ -35,12 +36,12 @@ class PlayerList:
             self.head = None
             self.tail = None
         else:
-            self.tail = self.tail.prev
-            self.tail.next = None
+            self.head = self.head.next
+            self.head.prev = None
         self.size -= 1
         return removed_player
 
-    def shift(self):  # remove node at the beginning of the list
+    def shift(self) -> Player:  # remove node at the beginning of the list
         if self.head is None:
             raise IndexError('Shifting from an empty list')
         removed_player = self.head.player
@@ -53,7 +54,7 @@ class PlayerList:
         self.size -= 1
         return removed_player
 
-    def unshift(self, player):  # Add node to beginning of the list
+    def unshift(self, player) -> None:  # Add node to beginning of the list
         new_node = PlayerNode(player)
         if self.head is None:  # if empty list
             self.head = new_node
@@ -64,21 +65,29 @@ class PlayerList:
             self.head = new_node
         self.size += 1
 
-    def delete(self, key):  # remove the first occurrence of a node of a specified value
+    def delete(self, player: int) -> Player | None:  # remove the first occurrence of a node of a specified value
         current = self.head
         while current:
-            if current.key == key:
-                if current == self.head:    #Delete the player if it is the head
+            if current.player.uid == player:
+                if current == self.head:
                     return self.shift()
-                elif current == self.tail:      #Delete the player if it's the tail
+                elif current == self.tail:
                     return self.pop()
-                else:       #delete if it's in the middle
+                else:
                     current.prev.next = current.next
                     current.next.prev = current.prev
                     self.size -= 1
                 return
             current = current.next
-        raise ValueError(f"{key} not found in list")
+        raise ValueError(f"{player} not found in list")
+
+    def search (self, player: Player) -> Player | None:
+        current = self.head
+        while current is not None:
+            if current.player.uid == player:
+                return current
+            current = current.next
+        return None
 
     def display(self, forward=True):
         if forward:
@@ -91,3 +100,4 @@ class PlayerList:
             while current:
                 print(f"Player: {current.player.name}, UID: {current.player.uid}")
                 current = current.prev
+

@@ -11,6 +11,10 @@ class PlayerNode:
     def player(self):
         return self._player
 
+    # @player.setter
+    # def player(self, new_player):
+    #     self.player = new_player
+
     @property
     def key(self):
         return self.player.uid
