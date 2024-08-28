@@ -1,9 +1,10 @@
-from glob import has_magic
-
 from app.player import Player
+from app.player_list import PlayerList
 
 
+#references used:
 # https://www.geeksforgeeks.org/hash-map-in-python/
+# https://amiaynarayan.medium.com/hash-table-linked-list-implementation-5afcee05eafe
 class PlayerHashMap:
     # create empty player list of given size
     def __init__(self, size):
@@ -12,6 +13,7 @@ class PlayerHashMap:
 
     def create_player_lists(self):
         return [[] for _ in range(self.size)]
+        #return [PlayerList() for _ in range(self.size)]
 
     def get_index(self, key: str | Player) -> int:
         if isinstance(key, Player):
@@ -41,8 +43,10 @@ class PlayerHashMap:
         # otherwise add new key and value
         if found_key:
             player_list[index] = (key, value)
+            #self.hash_map[self.get_index(key)].push(Player(key, value))
         else:
             player_list.append((key, value))
+            #self.hash_map[self.get_index(key)].push(Player(key, value))
 
     # return searched value with specific key
     def __getitem__(self, key: str) -> str:
@@ -61,6 +65,13 @@ class PlayerHashMap:
             return record_value
         else:
             return "Not Found"
+        # index = self.get_index(key)
+        # player = self.hash_map[index].search(key)
+        # if player:
+        #     return player.name
+        # else:
+        #     return "Not Found"
+
 
     #
     def __len__(self) -> int:
@@ -81,6 +92,7 @@ class PlayerHashMap:
 
         if found_key:
             player_list.pop(index)
+            #self.hash_map[self.get_index(key)].delete(index)
         return
 
     def __str__(self) -> str:
@@ -93,7 +105,12 @@ class PlayerHashMap:
 
 
 # hash_table = PlayerHashMap(10)
-#
+# # playerList = PlayerList()
+# # player1 = Player("123", "abc")
+# # player2 = Player("456", "def")
+# # playerList.push(player1)
+# # playerList.push(player2)
+# # playerList.push(Player("456", "def"))
 # hash_table.__setitem__("123", "abc")
 # hash_table.__setitem__("789", "fgh")
 # hash_table.__setitem__("456", "def")
