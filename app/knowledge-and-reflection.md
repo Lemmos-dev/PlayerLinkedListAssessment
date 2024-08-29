@@ -77,31 +77,33 @@ def sha256_hash(key: str, size: int) -> int:
 
 2. What are the advantages and disadvantages of each of the above hash functions? Evaluate in terms of uniformity, determinism, efficiency, collision resistance, sensitivity to input changes, and security[1](#Reference). You may need to do some reasearch to answer this question 😱
 
->SSH: 
-Advantages: Extremely efficient and deterministic.
-Disadvantages: Only ever returns 1 which means; No collision resistance, no security, no sensitivity to input changes.
+>- SSH: 
+>  - Advantages: Extremely efficient and deterministic.
+>  - Disadvantages: Only ever returns 1 which means; No collision resistance, no security, no sensitivity to input changes.
 
-> Sum of Ascii_values: 
-> Advantages: Efficient, simple and deterministic.
-> Disadvantages: It has a poor distribution rate as characters in different orders will lead to the same sum. Lacks uniformity and doesn't offer uniqueness need for security. 
+>- Sum of Ascii_values: 
+>  - Advantages: Efficient, simple and deterministic.
+>  - Disadvantages: It has a poor distribution rate as characters in different orders will lead to the same sum. Lacks uniformity and doesn't offer uniqueness need for security. 
 
-> Pearson Hash:
-> Advantages: Simple and efficient. Collisions are unlikely in small data sets
-> Disadvantages: Not suited for large data sets as it only generates short hash values. Lacks security
+>- Pearson Hash:
+>  - Advantages: Simple and efficient. Collisions are unlikely in small data sets
+>  - Disadvantages: Not suited for large data sets as it only generates short hash values. Lacks security
 
-> Built in hash:
-> Advantages: Optimised and efficient and suited for general purpose python features such as dictionaries.
-> Disadvantages: Lacks determinism across sessions and updates as python will change the random seed for the hash.
+>- Built in hash:
+>  - Advantages: Optimised and efficient and suited for general purpose python features such as dictionaries.
+>  - Disadvantages: Lacks determinism across sessions and updates as python will change the random seed for the hash.
 
-> SHA256:
-> Advantages: Deterministic, non-reversible, collision resistant, and extremely sensitive to input changes.
-> Disadvantages: Not as efficient as other hashing methods, Large output size which will noy work if the host machine has too low bit width 
+>- SHA256:
+>  - Advantages: Deterministic, non-reversible, collision resistant, and extremely sensitive to input changes.
+>  - Disadvantages: Not as efficient as other hashing methods, Large output size which will noy work if the host machine has too low bit width 
 
 3. List the three most important attributes (arranged from most to least) in the context of a hash map? Justify your answer.
 
-> Deterministic - If the same input doesn't produce the same output then you won't be able to find the hashed data
-> 
-> 
+>- Deterministic - Hash maps rely on consistent mapping. If the same input doesn't produce the same output then you won't be able to find or store data based on keys
+>- Efficiency - Hashes are used to speed up the process of finding data. If the process is too slow it would not be worth using.
+>- Uniformity - Reduces the chance of clustering and collisions which in turn improves the efficiency
+>
+>- Collision Resistance can be handled with additional techniques. Sensitivity to input changes and security are not important for general hashing
 
 4. Which of the above hash functions would you choose to implement the requirements of the task? Why?
 
@@ -123,7 +125,7 @@ Disadvantages: Only ever returns 1 which means; No collision resistance, no secu
 
 2. If you didn't have to use a PlayerList, how would you have changed them implementation of the hash map and why?
 
-> Your answer here
+> Change to create a list of PlayerLists. And each function would need to be adjusted to be able to work with the list of player lists
 
 ## Reference
 
@@ -146,3 +148,4 @@ Disadvantages: Only ever returns 1 which means; No collision resistance, no secu
 ## Sources Used
 https://www.wallstreetmojo.com/hash-function/
 https://kinsta.com/blog/python-hashing/
+https://en.wikipedia.org/wiki/Pearson_hashing

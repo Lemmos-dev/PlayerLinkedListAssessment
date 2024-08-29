@@ -13,7 +13,6 @@ class PlayerHashMap:
 
     def create_player_lists(self):
         return [[] for _ in range(self.size)]
-        #return [PlayerList() for _ in range(self.size)]
 
     def get_index(self, key: str | Player) -> int:
         if isinstance(key, Player):
@@ -43,10 +42,8 @@ class PlayerHashMap:
         # otherwise add new key and value
         if found_key:
             player_list[index] = (key, value)
-            #self.hash_map[self.get_index(key)].push(Player(key, value))
         else:
             player_list.append((key, value))
-            #self.hash_map[self.get_index(key)].push(Player(key, value))
 
     # return searched value with specific key
     def __getitem__(self, key: str) -> str:
@@ -65,12 +62,6 @@ class PlayerHashMap:
             return record_value
         else:
             return "Not Found"
-        # index = self.get_index(key)
-        # player = self.hash_map[index].search(key)
-        # if player:
-        #     return player.name
-        # else:
-        #     return "Not Found"
 
 
     #
@@ -92,7 +83,6 @@ class PlayerHashMap:
 
         if found_key:
             player_list.pop(index)
-            #self.hash_map[self.get_index(key)].delete(index)
         return
 
     def __str__(self) -> str:
@@ -124,3 +114,17 @@ class PlayerHashMap:
 # print(hash_table)
 # print()
 
+#Create list
+#return [PlayerList() for _ in range(self.size)]
+#Set
+#self.hash_map[self.get_index(key)].push(Player(key, value))
+
+#get
+# index = self.get_index(key)
+        # player = self.hash_map[index].search(key)
+        # if player:
+        #     return player.name
+        # else:
+        #     return "Not Found"
+
+# self.hash_map[self.get_index(key)].delete(index)
