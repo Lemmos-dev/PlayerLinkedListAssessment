@@ -111,21 +111,56 @@ def sha256_hash(key: str, size: int) -> int:
 
 5. In your own words, explain each line in the pearson hash function above in terms of the criteria you listed in question 2.
 
-> Your answer here
+> - import random 
+> random.seed(42)
+>  - Randomness with a set seed in a pearson table shuffles the table but still provides deterministic outputs
+>- pearson_table = list(range(256))
+>  - Pearson hashing works by having a table of all byte values to cover all potential inputs of ASCII or byte characters.
+>  - Which makes it efficient to use but also the byte size limits its use to small datasets
+>- random.shuffle(pearson_table)
+>  - Shuffling the table prevents the hash from using a sequential byte order. Improving uniformity
+>- def pearson_hash(key: str, size: int) -> int:
+    hash_ = 0
+>  - Defines the pearson hash function and its two inputs key and size as well as the expected types and initializes the hash value
+>-  for char in key:
+>  - Efficient looping for small datasets
+>- hash_ = pearson_table[hash_ ^ ord(char)]
+>  - Every character is XORed with the current hash value with the result being indexed the pearson table and get the next hash value 
+>  - This makes it sensitive to input changes and reduces the chance of collisions.
+>- return hash_ % size
+>  - The hash value is reduced to fit within the specified size
 
 6. Write pseudocode of how you would store Players in PlayerLists in a hash map.
 
-> Your answer here
+```python
+   #Function that adds a player to a playerlist in a hashmap
+    function setplayer (hash_map, playerlist, player)
+        #Hash the list name to get the list of playerlists
+        index = hash_function(playerlist)
+        
+        #check if the playerlist is in the hash map
+        if hash_map[index] is null
+            #if it is empty create a new list
+            hash_map[index] = PlayerList()
+
+        #add the player to the new list
+        hash_map[index].playerlist.push(player)
+```
 
 ## Reflection
 
 1. What was the most challenging aspect of this task?
 
-> Your answer here
+> Explaining the pearson table
 
 2. If you didn't have to use a PlayerList, how would you have changed them implementation of the hash map and why?
 
-> Change to create a list of PlayerLists. And each function would need to be adjusted to be able to work with the list of player lists
+> Change it to create a list of PlayerLists. And each function would need to be adjusted to be able to work with the list of player lists
+
+## Sources Used
+https://www.wallstreetmojo.com/hash-function/
+https://kinsta.com/blog/python-hashing/
+https://en.wikipedia.org/wiki/Pearson_hashing
 
 ## Reference
 
@@ -145,7 +180,4 @@ def sha256_hash(key: str, size: int) -> int:
    - It should be computationally infeasible to find an input key that produces a specific hash value (non-reversibility)
    - The output hash values should appear random and unpredictable.
 
-## Sources Used
-https://www.wallstreetmojo.com/hash-function/
-https://kinsta.com/blog/python-hashing/
-https://en.wikipedia.org/wiki/Pearson_hashing
+

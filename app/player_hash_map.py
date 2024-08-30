@@ -23,7 +23,7 @@ class PlayerHashMap:
     # Insert values into hash map
     def __setitem__(self, key: str, value: str) -> None:
         # get the index from the key using the hash function
-        # get the player with the corresponding key
+        # get the list with the corresponding key
         player_list = self.hash_map[self.get_index(key)]
 
         record_value = None
@@ -33,7 +33,7 @@ class PlayerHashMap:
         for index, record in enumerate(player_list):
             record_key, record_value = record
 
-            # check if player has the same key that will be inserted
+            # check if the list has the same key that is searched for
             if record_key == key:
                 found_key = True
                 break
@@ -47,17 +47,18 @@ class PlayerHashMap:
 
     # return searched value with specific key
     def __getitem__(self, key: str) -> str:
+        # get the key and use it get the list
         player_list = self.hash_map[self.get_index(key)]
 
         record_value = None
         found_key = False
         for index, record in enumerate(player_list):
             record_key, record_value = record
-
+            # check if the list has the same key that is searched for
             if record_key == key:
                 found_key = True
                 break
-
+        #if the key is found in the list return the value
         if found_key:
             return record_value
         else:
@@ -70,13 +71,14 @@ class PlayerHashMap:
 
     # remove a value with a specific key
     def __delitem__(self, key: str) -> None:
+        # get the key and use it get the list
         player_list = self.hash_map[self.get_index(key)]
 
         index = None
         found_key = False
         for index, record in enumerate(player_list):
             record_key, record_value = record
-
+            # check if the list has the same key that is searched for
             if record_key == key:
                 found_key = True
                 break
@@ -93,38 +95,3 @@ class PlayerHashMap:
             if value:
                 print(f"Key {key}: {value}")
 
-
-# hash_table = PlayerHashMap(10)
-# # playerList = PlayerList()
-# # player1 = Player("123", "abc")
-# # player2 = Player("456", "def")
-# # playerList.push(player1)
-# # playerList.push(player2)
-# # playerList.push(Player("456", "def"))
-# hash_table.__setitem__("123", "abc")
-# hash_table.__setitem__("789", "fgh")
-# hash_table.__setitem__("456", "def")
-# print(hash_table.__getitem__("123"))
-# hash_table.display()
-# print(len(hash_table))
-# print()
-# print(hash_table)
-# print()
-# hash_table.__delitem__("456")
-# print(hash_table)
-# print()
-
-#Create list
-#return [PlayerList() for _ in range(self.size)]
-#Set
-#self.hash_map[self.get_index(key)].push(Player(key, value))
-
-#get
-# index = self.get_index(key)
-        # player = self.hash_map[index].search(key)
-        # if player:
-        #     return player.name
-        # else:
-        #     return "Not Found"
-
-# self.hash_map[self.get_index(key)].delete(index)
