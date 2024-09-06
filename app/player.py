@@ -7,9 +7,10 @@ random.shuffle(pearson_table)
 
 
 class Player:
-    def __init__(self, uid: str, name: str) -> None:
+    def __init__(self, uid: str, name: str, score: int=0) -> None:
         self._uid = uid
         self._name = name
+        self._score = score
 
     @property
     def name(self):
@@ -19,8 +20,38 @@ class Player:
     def uid(self) -> str:
         return self._uid
 
+    @property
+    def score(self) -> int:
+        return self._score
+
+    @score.setter
+    def score(self, score: int) -> None:
+        self._score = score
+
+    def __eq__(self, other) -> bool:
+        return self.score == other.score
+
+    def __ge__(self, other) -> bool:
+        return self.score >= other.score
+
+    def __lt__(self, other) -> bool:
+        return self.score < other.score
+
+    @staticmethod
+    def quicksort(arr: list) -> list:
+        if len(arr) < 2:
+            return arr
+        pivot = arr[0]
+        less_than_pivot = [v for v in arr[1:] if v < pivot]
+        greater_than_pivot = [v for v in arr[1:] if v >= pivot]
+        return Player.quicksort(greater_than_pivot) + [pivot] + Player.quicksort(less_than_pivot)
+
+
     def __str__(self):
-        return f"{self.uid}, {self.name}"
+        return f"{self.uid}, {self.name}, {self.score}"
+
+    def __repr__(self):
+        return f"{self.uid}, {self.name}, {self.score}"
 
     @staticmethod
     def hash(key: str, size: int) -> int:
@@ -36,8 +67,8 @@ class Player:
     def __hash__(self):
         return self.hash(self.uid, len(Player.__key(self)))
 
-    def __eq__(self, other):
-        if isinstance(other, Player):
-            return self.uid == other.uid
-        return NotImplemented
+    # def __eq__(self, other):
+    #     if isinstance(other, Player):
+    #         return self.uid == other.uid
+    #     return NotImplemented
 
