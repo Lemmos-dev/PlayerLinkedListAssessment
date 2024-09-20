@@ -1,3 +1,4 @@
+from __future__ import annotations
 from app.player import Player
 from app.player_bnode import PlayerBNode
 
@@ -38,3 +39,28 @@ class PlayerBST[T]:
             return self._search(name, root.left)
         elif name > root.value:
             return self._search(name, root.right)
+
+    def makelist(self, node: PlayerBNode) -> list[PlayerBNode]:
+        if node is None:
+            return []
+        return self.makelist(node.left) + [node.value] + self.makelist(node.right)
+
+    def bstsortedlist(self) -> list[PlayerBNode]:
+        new_list = self.makelist(self.root)
+        return sorted(new_list)
+
+    def balancedBST(self):
+        sorted_list = self.bstsortedlist()
+
+        self.root = self._balancedBST(sorted_list, 0, len(sorted_list) - 1)
+
+    def _balancedBST(self, sorted_list: list[PlayerBNode], start, end):
+        if start > end:
+            return None
+        middle = (start + end) // 2
+        new_node = PlayerBNode(sorted_list[middle])
+        new_node.left = self._balancedBST(sorted_list, start, middle - 1)
+        new_node.right = self._balancedBST(sorted_list, middle + 1, end)
+        return new_node
+
+

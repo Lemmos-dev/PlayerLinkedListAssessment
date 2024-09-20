@@ -35,5 +35,11 @@ class TestBST(unittest.TestCase):
         assert bst.search("test") is None
 
     def test_balance(self):
-        ...
-
+        bst = PlayerBST()
+        player = Player("123", "John", 10)
+        player2 = Player("456", "Bob", 5)
+        player3 = Player("789", "Ryan", 15)
+        bst.insert(player.name)
+        bst.insert(player2.name)
+        bst.insert(player3.name)
+        #TODO: Implement function in player_bst that checks if the tree is balanced
