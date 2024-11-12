@@ -16,6 +16,10 @@ class Player:
     def name(self):
         return self._name
 
+    @name.setter
+    def name(self, name: str) -> None:
+        self._name = name
+
     @property
     def uid(self) -> str:
         return self._uid
@@ -60,9 +64,8 @@ class Player:
             hash_ = pearson_table[hash_ ^ ord(char)]
         return hash_ % size
 
-    # https://stackoverflow.com/questions/2909106/whats-a-correct-and-good-way-to-implement-hash
     def __key(self):
-        return self._uid, self._name
+        return self._uid
 
     def __hash__(self):
         return self.hash(self.uid, len(Player.__key(self)))

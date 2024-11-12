@@ -65,10 +65,10 @@ class PlayerList:
             self.head = new_node
         self.size += 1
 
-    def delete(self, player: int) -> Player | None:  # remove the first occurrence of a node of a specified value
+    def delete(self, uid: str) -> Player | None:  # remove the first occurrence of a node of a specified value
         current = self.head
         while current:
-            if current.player.uid == player:
+            if current.player.uid == uid:
                 if current == self.head:
                     return self.shift()
                 elif current == self.tail:
@@ -79,13 +79,20 @@ class PlayerList:
                     self.size -= 1
                 return
             current = current.next
-        raise ValueError(f"{player} not found in list")
+        raise ValueError(f"{uid} not found in list")
 
-    def search (self, player: Player) -> Player | None:
+    def update(self, player: Player):
+        node = self.search(player.uid)
+        if node:
+            node.name = player.name
+            return True
+        return False
+
+    def search (self, key: str) -> Player | None:
         current = self.head
         while current is not None:
-            if current.player.uid == player:
-                return current
+            if current.player.uid == key:
+                return current.player
             current = current.next
         return None
 
