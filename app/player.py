@@ -42,12 +42,12 @@ class Player:
         return self.score < other.score
 
     @staticmethod
-    def quicksort(arr: list) -> list:
-        if len(arr) < 2:
-            return arr
-        pivot = arr[0]
-        less_than_pivot = [v for v in arr[1:] if v < pivot]
-        greater_than_pivot = [v for v in arr[1:] if v >= pivot]
+    def quicksort(array: list) -> list:
+        if len(array) < 2:
+            return array
+        pivot = array[0]
+        less_than_pivot = [v for v in array[1:] if v < pivot]
+        greater_than_pivot = [v for v in array[1:] if v >= pivot]
         return Player.quicksort(greater_than_pivot) + [pivot] + Player.quicksort(less_than_pivot)
 
 

@@ -73,13 +73,13 @@ def sha256_hash(key: str, size: int) -> int:
 
 1. All of the above functions are hash functions. Explain how so - what key properties do they all share?
 
-> Hash functions take data of any size and transforms it to a fixed length of data that represents the original input
+> Hash functions take data of any size and transforms it to a fixed length of data. This new data cannot be reversed to its original form.
 
 2. What are the advantages and disadvantages of each of the above hash functions? Evaluate in terms of uniformity, determinism, efficiency, collision resistance, sensitivity to input changes, and security[1](#Reference). You may need to do some reasearch to answer this question 😱
 
 >- SSH: 
 >  - Advantages: Extremely efficient and deterministic.
->  - Disadvantages: Only ever returns 1 which means; No collision resistance, no security, no sensitivity to input changes.
+>  - Disadvantages: Only ever returns 1 which means; No collision resistance, no sensitivity to input changes.
 
 >- Sum of Ascii_values: 
 >  - Advantages: Efficient, simple and deterministic.

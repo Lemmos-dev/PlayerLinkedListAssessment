@@ -39,5 +39,5 @@ class PlayerListTest(unittest.TestCase):
         player2 = Player("456", "def")
         lst.push(player1)
         lst.push(player2)
-        lst.delete(123)
+        lst.delete("123")
         self.assertEqual(len(lst), 1)
