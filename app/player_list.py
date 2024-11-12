@@ -1,7 +1,9 @@
 from app.player import Player
 from app.player_node import PlayerNode
 
-
+# References used:
+# https://favtutor.com/blogs/doubly-linked-list-python
+# https://www.geeksforgeeks.org/doubly-linked-list-in-python/
 class PlayerList:
     def __init__(self):
         self.head = None

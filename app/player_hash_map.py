@@ -2,6 +2,9 @@ from app.player import Player
 from app.player_list import PlayerList
 
 
+# References used:
+# https://www.geeksforgeeks.org/hash-map-in-python/
+# https://www.w3schools.com/dsa/dsa_data_hashmaps.php
 class PlayerHashMap:
     # create empty player list of given size
     def __init__(self, size):
